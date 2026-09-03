@@ -6,7 +6,15 @@ date_input = input()
 plate = input()
 
 class Action:
-    def __init__(self, date: datetime, plate):
+    def __init__(self, date, plate):
+        try:
+            date = datetime.strptime(date_input, "%Y-%m-%d")
+        except ValueError:
+            raise "error: date"
+
+        plate_pattern = r'^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3}$'
+        if not re.match(plate_pattern, plate):
+            raise "error: plate"
         self.date = date
         self.plate = plate
 
@@ -15,18 +23,9 @@ class Action:
     def to_db(self):
         return {"date":self.date.strftime("%Y-%m-%d"), "plate": self.plate}
 
-try:
-    date = datetime.strptime(date_input, "%Y-%m-%d")
-except ValueError:
-    print("error: date")
-    exit()
 
-plate_pattern = r'^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3}$'
-if not re.match(plate_pattern, plate):
-    print("error: plate")
-    exit()
 
-a = Action(date, plate)
+a = Action(date_input, plate)
 a.print()
 InMemoryDB.append(a.to_db())
 print("DB :",InMemoryDB)
