@@ -15,7 +15,6 @@ from validators import validate_date
 
 
 def process_single_action() -> Action | None:
-    """Обрабатывает один объект, введенный пользователем."""
     date_input = input("Введите дату (YYYY-MM-DD): ").strip()
     plate_input = input("Введите номер автомобиля: ").strip()
 
@@ -34,7 +33,6 @@ def process_single_action() -> Action | None:
 
 
 def process_string_example() -> list:
-    """Демонстрирует обработку набора объектов из строки."""
     sample = """\
 2024-01-15;А123ВС77
 2024-01-16;В456ЕК99;123456
@@ -49,11 +47,7 @@ def process_string_example() -> list:
 
 
 def process_file_example(filepath: str) -> list:
-    """Демонстрирует обработку набора объектов из файла.
 
-    Args:
-        filepath: Путь к файлу с данными.
-    """
     print(f"\n=== Обработка файла: {filepath} ===")
     actions = parse_file(filepath)
     if not actions:
@@ -65,7 +59,6 @@ def process_file_example(filepath: str) -> list:
 
 
 def main() -> None:
-    """Точка входа в программу."""
     db = InMemoryDB()
 
     single = process_single_action()

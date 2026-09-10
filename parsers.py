@@ -1,5 +1,4 @@
-﻿"""Модуль парсинга строк и файлов с данными."""
-
+﻿
 from typing import List, Optional
 
 from models import Action, StudentAction, EmployeeAction
@@ -10,19 +9,6 @@ FIELD_SEPARATOR = ";"
 
 
 def parse_line(line: str) -> Optional[Action]:
-    """Парсит одну строку и возвращает объект Action.
-
-    Поддерживаемые форматы:
-        Action:         дата;номер
-        StudentAction:  дата;номер;student_id
-        EmployeeAction: дата;номер;employee_id;отдел
-
-    Args:
-        line: Строка с данными.
-
-    Returns:
-        Объект Action или None, если строка некорректна.
-    """
     line = line.strip()
     if not line or line.startswith("#"):
         return None
@@ -65,14 +51,6 @@ def parse_line(line: str) -> Optional[Action]:
 
 
 def parse_file(filepath: str) -> List[Action]:
-    """Парсит файл с данными.
-
-    Args:
-        filepath: Путь к файлу.
-
-    Returns:
-        Список объектов Action.
-    """
     actions = []
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -88,14 +66,6 @@ def parse_file(filepath: str) -> List[Action]:
 
 
 def parse_string(text: str) -> List[Action]:
-    """Парсит многострочную строку с данными.
-
-    Args:
-        text: Строка с данными (разделитель  перенос строки).
-
-    Returns:
-        Список объектов Action.
-    """
     actions = []
     for line in text.splitlines():
         action = parse_line(line)
