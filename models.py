@@ -8,7 +8,7 @@ from validators import (
     validate_employee_id,
 )
 
-
+def a(): print(1)
 @dataclass
 class Action:
     date: datetime
