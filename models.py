@@ -8,13 +8,13 @@ from validators import (
     validate_employee_id,
 )
 
-def a(): print(1)
 @dataclass
 class Action:
     date: datetime
     plate: str
 
     def __post_init__(self):
+        raise SystemError()
         if not isinstance(self.date, datetime):
             raise ValueError("error: date")
         if not validate_plate(self.plate):
